@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruitingTask", "RecruitingTask\RecruitingTask.csproj", "{C9E9C168-0E63-4A44-B162-56379D8170FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Commons\Common.csproj", "{67F8BDFA-5FD3-4A29-B27F-3CEFB490186C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9E9C168-0E63-4A44-B162-56379D8170FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E9C168-0E63-4A44-B162-56379D8170FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E9C168-0E63-4A44-B162-56379D8170FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E9C168-0E63-4A44-B162-56379D8170FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F8BDFA-5FD3-4A29-B27F-3CEFB490186C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F8BDFA-5FD3-4A29-B27F-3CEFB490186C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F8BDFA-5FD3-4A29-B27F-3CEFB490186C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F8BDFA-5FD3-4A29-B27F-3CEFB490186C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A415F491-F10C-49FF-9F18-47F89B0A272D}
+	EndGlobalSection
+EndGlobal
