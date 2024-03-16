@@ -1,0 +1,14 @@
+{
+  "chicken": [
+    {
+      "weight": 1200,
+      "grade": 3,
+      "dropOffId": 12
+    },
+    {
+      "weight": 1800,
+      "grade": 1,
+      "dropOffId": 1
+    }
+  ]
+}
