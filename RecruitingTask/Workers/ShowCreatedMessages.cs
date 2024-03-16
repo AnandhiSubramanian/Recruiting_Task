@@ -30,17 +30,17 @@ namespace RecruitingTask.Workers
 
         private void OnChickenDropOff(IChickenDropOffData obj)
         {
-            _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
+            // _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
         }
 
         private void OnChickenGrade(IChickenGradeData obj)
         {
-            _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
+            // _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
         }
 
         private void OnChickenWeight(IChickenWeightData obj)
         {
-            _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
+            // _logger.LogInformation("{Date} - {JsonObject}", DateTime.UtcNow, JsonConvert.SerializeObject(obj));
         }
     }
 }
