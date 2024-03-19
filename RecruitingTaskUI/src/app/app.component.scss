@@ -1,0 +1,31 @@
+$primary-color-blue1: #496989;
+$primary-color-blue2: #58a399;
+
+$sec-color-blue1: #a8cd9f;
+$sec-color-blue2: #e2f4c5;
+$sec-color-blue3: #164863;
+$sec-color-blue4: #427d9d;
+$sec-color-blue5: #9bbec8;
+$sec-color-blue6: #ddf2fd;
+
+.main-container {
+  display: grid;
+  grid-template-rows: 10% 80%;
+  height: 100vh;
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-row: 2/3;
+  grid-template-columns: 5% 90%;
+  background-color: black;
+}
+
+.content .nav {
+  background-color: $primary-color-blue1;
+}
+
+.header {
+  background-color: $primary-color-blue1;
+}

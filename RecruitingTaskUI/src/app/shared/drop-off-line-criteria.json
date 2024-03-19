@@ -1,0 +1,117 @@
+{
+  "dropOffLines": {
+    "gradeA": [
+      {
+        "rangeStart": 1,
+        "rangeEnd": 1699,
+        "dropOffLine": 15
+      },
+      {
+        "rangeStart": 1500,
+        "rangeEnd": 1999,
+        "dropOffLine": 1
+      },
+      {
+        "rangeStart": 2000,
+        "rangeEnd": 3000,
+        "dropOffLine": 2
+      },
+      {
+        "rangeStart": 3301,
+        "rangeEnd": 9999,
+        "dropOffLine": 16
+      },
+      {
+        "rangeStart": 3001,
+        "rangeEnd": 3500,
+        "dropOffLine": 3
+      }
+    ],
+    "gradeB": [
+      {
+        "rangeStart": 1,
+        "rangeEnd": 1699,
+        "dropOffLine": 15
+      },
+      {
+        "rangeStart": 1500,
+        "rangeEnd": 2299,
+        "dropOffLine": 5
+      },
+      {
+        "rangeStart": 2300,
+        "rangeEnd": 2700,
+        "dropOffLine": 0
+      },
+      {
+        "rangeStart": 3301,
+        "rangeEnd": 9999,
+        "dropOffLine": 16
+      },
+      {
+        "rangeStart": 2701,
+        "rangeEnd": 3500,
+        "dropOffLine": 8
+      }
+    ],
+    "gradeC": [
+      {
+        "rangeStart": 1,
+        "rangeEnd": 1699,
+        "dropOffLine": 15
+      },
+      {
+        "rangeStart": 1600,
+        "rangeEnd": 2000,
+        "dropOffLine": 12
+      },
+      {
+        "rangeStart": 2000,
+        "rangeEnd": 3000,
+        "dropOffLine": 13
+      },
+      {
+        "rangeStart": 2300,
+        "rangeEnd": 2700,
+        "dropOffLine": 0
+      },
+      {
+        "rangeStart": 3301,
+        "rangeEnd": 9999,
+        "dropOffLine": 16
+      },
+      {
+        "rangeStart": 3000,
+        "rangeEnd": 3400,
+        "dropOffLine": 14
+      }
+    ],
+    "gradeX": [
+      {
+        "rangeStart": 1,
+        "rangeEnd": 1699,
+        "dropOffLine": 15
+      },
+      {
+        "rangeStart": 1600,
+        "rangeEnd": 2000,
+        "dropOffLine": 12
+      },
+      {
+        "rangeStart": 2000,
+        "rangeEnd": 3000,
+        "dropOffLine": 13
+      },
+      {
+        "rangeStart": 3301,
+        "rangeEnd": 9999,
+        "dropOffLine": 16
+      },
+      {
+        "rangeStart": 3000,
+        "rangeEnd": 3400,
+        "dropOffLine": 14
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 export interface ChickenData {
-  weight: number;
-  grade: number;
-  dropOffId: number;
+  weight?: number;
+  grade?: number;
+  dropOff?: number;
+  shackleId: number;
 }

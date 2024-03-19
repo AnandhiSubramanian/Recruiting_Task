@@ -1,0 +1,50 @@
+$primary-color-blue1: #496989;
+$primary-color-blue2: #58a399;
+
+$sec-color-blue1: #a8cd9f;
+$sec-color-blue2: #e2f4c5;
+$sec-color-blue3: #164863;
+$sec-color-blue4: #427d9d;
+$sec-color-blue5: #9bbec8;
+$sec-color-blue6: #ddf2fd;
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+
+  div {
+    border-left: 0.5px solid gray;
+    border-bottom: 0.5px dotted gray;
+    color: white;
+    background-color: black;
+    padding: 5px;
+  }
+}
+
+.data-container {
+  border-bottom: 0.25px solid gray;
+  border-left: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  width: 100%;
+
+  div.entry {
+    border-bottom: 0.25px solid gray;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    label {
+      display: flex;
+      justify-content: start;
+      align-items: end;
+    }
+    .val {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      border: none;
+      padding-right: 15px;
+    }
+  }
+}

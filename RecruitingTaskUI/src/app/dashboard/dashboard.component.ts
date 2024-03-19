@@ -1,57 +1,97 @@
 import { Component } from '@angular/core';
 import { DataService } from '../shared/data.service';
+import { DropOffGeneratorService } from '../shared/drop-off-generator.service';
+import { ChickenData } from '../shared/chicken-data';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  constructor(private dataSvc: DataService) {}
+  dropOffLaneCountData: number[] = [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ];
+  dataset = [
+    { name: 'Line 1', value: this.dropOffLaneCountData[0] },
+    { name: 'Line 2', value: this.dropOffLaneCountData[1] },
+    { name: 'Line 3', value: this.dropOffLaneCountData[2] },
+    { name: 'Line 5', value: this.dropOffLaneCountData[4] },
+    { name: 'Line 6', value: this.dropOffLaneCountData[5] },
+    { name: 'Line 7', value: this.dropOffLaneCountData[6] },
+    { name: 'Line 8', value: this.dropOffLaneCountData[7] },
+    { name: 'Line 12', value: this.dropOffLaneCountData[11] },
+    { name: 'Line 13', value: this.dropOffLaneCountData[12] },
+    { name: 'Line 14', value: this.dropOffLaneCountData[13] },
+    { name: 'Line 15', value: this.dropOffLaneCountData[14] },
+    { name: 'Line 16', value: this.dropOffLaneCountData[15] },
+  ];
+
   timer: any;
-  ShackleDataArray: { shackleId: number; weight?: number; grade?: number }[] =
-    [];
-  currentShackleData: { shackleId: number; weight?: number; grade?: number }[] =
-    [];
+  ShackleDataArray: ChickenData[] = [];
+  currentShackleData: ChickenData = {
+    weight: 0,
+    grade: 0,
+    dropOff: 0,
+    shackleId: 0,
+  };
+
+  constructor(
+    private dataSvc: DataService,
+    private dropGenSvc: DropOffGeneratorService
+  ) {}
 
   ngOnInit() {
     this.timer = setInterval(() => {
-      this.dataSvc.getGradeData().subscribe(
-        (data) => {
-          this.combineData(data[0].shackleId, 'grade', data[0].grade);
-        },
-        (error) => {}
-      );
-
-      this.dataSvc.getWeightData().subscribe(
-        (data) => {
-          this.combineData(data[0].shackleId, 'weight', data[0].weightInGram);
-        },
-        (error) => {}
-      );
-    }, 100);
+      this.getGradeData();
+      this.getWeightData();
+    }, 250);
   }
 
-  combineData(id: number, parameter: string, value: number) {
-    const existingShackleIndex = this.ShackleDataArray.findIndex(
-      (item) => item.shackleId === id
-    );
-
-    const existingShackleItem = this.ShackleDataArray[existingShackleIndex];
-
-    if (existingShackleItem) {
-      const shackleItem = {
-        ...existingShackleItem,
+  dataArray: ChickenData[] = [];
+  computSchakleData(id: number, parameter: string, value: number) {
+    const idx = this.dataArray.findIndex((data) => id === data.shackleId);
+    if (idx > -1) {
+      let currentSchakleItem = this.dataArray.splice(idx, 1)[0];
+      currentSchakleItem = {
+        ...currentSchakleItem,
         [parameter]: value,
       };
-      this.currentShackleData[0] = shackleItem;
-      this.ShackleDataArray[existingShackleIndex] = shackleItem;
+      currentSchakleItem.dropOff = this.dropGenSvc.calculateDropOff(
+        currentSchakleItem.weight,
+        currentSchakleItem.grade
+      );
 
-      console.log(this.currentShackleData[0]);
+      /*     this.dataset[currentSchakleItem.dropOff - 1].value =
+        this.dropOffLaneCountData[currentSchakleItem.dropOff - 1] += 1;
+      this.dataset = [...this.dataset]; */
+      this.currentShackleData = currentSchakleItem;
     } else {
       let shackleObj = { shackleId: id, [parameter]: value };
-      this.ShackleDataArray.push(shackleObj);
+      this.dataArray.push(shackleObj);
     }
+  }
+
+  getWeightData() {
+    this.dataSvc.getData('ChickenWeightData').subscribe(
+      (data) => {
+        this.computSchakleData(
+          data[0].shackleId,
+          'weight',
+          data[0].weightInGram
+        );
+      },
+      (error) => {}
+    );
+  }
+
+  getGradeData() {
+    this.dataSvc.getData('ChickenGradeData').subscribe(
+      (data) => {
+        this.computSchakleData(data[0].shackleId, 'grade', data[0].grade);
+      },
+      (error) => {}
+    );
   }
 
   ngOnDestroy() {

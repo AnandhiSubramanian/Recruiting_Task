@@ -1,12 +1,44 @@
-<p>dashboard works!</p>
-
-<div>
-  <!-- <ngx-charts-gauge
-    [results]="currentShackleData"
-    [min]="1500"
-    [max]="3500"
-    [angleSpan]="180"
-    [animations]="ani"
-  >
-  </ngx-charts-gauge> -->
+<div class="container">
+  <div class="data-container">
+    <div class="entry">
+      <label for="id">Shackle Id:</label>
+      <div name="id" class="val">{{ currentShackleData.shackleId }}</div>
+    </div>
+    <div class="entry">
+      <label for="weight">Bird weight:</label>
+      <div name="weight" class="val significant">
+        {{ currentShackleData.weight | number : "1.2" }}
+      </div>
+    </div>
+    <div class="entry">
+      <label for="grade">Grade:</label>
+      <div name="grade" class="val">{{ currentShackleData.grade }}</div>
+    </div>
+    <div class="entry">
+      <label for="dropOff">DropOff Id:</label>
+      <div name="dropOff" class="val significant">
+        {{ currentShackleData.dropOff }}
+      </div>
+    </div>
+  </div>
+  <div class="weight-container">
+    <ngx-charts-bar-horizontal
+      [results]="dataset"
+      [xAxisLabel]="'x-axis'"
+      [legendTitle]="'legend'"
+      [yAxisLabel]="'y-axis'"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [yAxis]="true"
+      [gradient]="false"
+      [view]="[600, 200]"
+    >
+    </ngx-charts-bar-horizontal>
+  </div>
+  <div class="grade-container"></div>
+  <div class="drop-container"></div>
+  <div class="weight-container"></div>
+  <div class="grade-container"></div>
+  <div class="drop-container"></div>
 </div>
