@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../shared/data.service';
 import { DropOffGeneratorService } from '../shared/drop-off-generator.service';
 import { ChickenData } from '../shared/chicken-data';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,25 @@ export class DashboardComponent {
     { name: 'Line 14', value: this.dropOffLaneCountData[13] },
     { name: 'Line 15', value: this.dropOffLaneCountData[14] },
     { name: 'Line 16', value: this.dropOffLaneCountData[15] },
+  ];
+
+  position = LegendPosition.Below;
+  series = [
+    {
+      name: 'Grade A',
+      value: 20,
+      label: '20%',
+    },
+    {
+      name: 'Grade B',
+      value: 70,
+      label: '70%',
+    },
+    {
+      name: 'Grade C',
+      value: 10,
+      label: '10%',
+    },
   ];
 
   timer: any;
@@ -62,9 +82,9 @@ export class DashboardComponent {
         currentSchakleItem.grade
       );
 
-      /*     this.dataset[currentSchakleItem.dropOff - 1].value =
+      this.dataset[currentSchakleItem.dropOff - 1].value =
         this.dropOffLaneCountData[currentSchakleItem.dropOff - 1] += 1;
-      this.dataset = [...this.dataset]; */
+      this.dataset = [...this.dataset];
       this.currentShackleData = currentSchakleItem;
     } else {
       let shackleObj = { shackleId: id, [parameter]: value };
@@ -92,6 +112,14 @@ export class DashboardComponent {
       },
       (error) => {}
     );
+  }
+
+  pieChartLabel(series: any[], name: string): string {
+    const item = series.filter((data) => data.name === name);
+    if (item.length > 0) {
+      return item[0].label;
+    }
+    return name;
   }
 
   ngOnDestroy() {

@@ -10,7 +10,7 @@ $sec-color-blue6: #ddf2fd;
 
 .main-container {
   display: grid;
-  grid-template-rows: 10% 80%;
+  grid-template-rows: 1fr 6fr;
   height: 100vh;
   width: 100%;
 }
@@ -18,14 +18,18 @@ $sec-color-blue6: #ddf2fd;
 .content {
   display: grid;
   grid-row: 2/3;
-  grid-template-columns: 5% 90%;
-  background-color: black;
+  grid-template-columns: 1fr 10fr;
+  background-color: rgb(27, 26, 26);
 }
 
 .content .nav {
-  background-color: $primary-color-blue1;
+  // background-color: $primary-color-blue1;
 }
 
 .header {
-  background-color: $primary-color-blue1;
+  background-color: black;
+  display: flex;
+  justify-content: end;
+  height: 3em;
+  // background-color: $primary-color-blue1;
 }
