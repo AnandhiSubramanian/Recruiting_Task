@@ -19,17 +19,50 @@ $sec-color-blue6: #ddf2fd;
   display: grid;
   grid-row: 2/3;
   grid-template-columns: 1fr 10fr;
-  background-color: rgb(27, 26, 26);
-}
-
-.content .nav {
-  // background-color: $primary-color-blue1;
-}
-
-.header {
   background-color: black;
+}
+.header {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   height: 3em;
-  // background-color: $primary-color-blue1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  // color: white;
+}
+.nav {
+  background-color: black;
+  color: white;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 1em;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+  justify-self: center;
+  justify-content: space-between;
+
+  padding: 0.5em;
+  padding-right: 1em;
+  background-color: rgb(59, 57, 57);
+}
+
+li:hover {
+  background-color: rgb(179, 174, 174);
 }

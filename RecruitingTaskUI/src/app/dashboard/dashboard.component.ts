@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { DataService } from '../shared/data.service';
 import { DropOffGeneratorService } from '../shared/drop-off-generator.service';
 import { ChickenData } from '../shared/chicken-data';
-import { LegendPosition } from '@swimlane/ngx-charts';
+import {
+  AxisLabelComponent,
+  LegendEntryComponent,
+  LegendPosition,
+  LegendType,
+} from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +34,16 @@ export class DashboardComponent {
   ];
 
   position = LegendPosition.Below;
+  customColors = [
+    {
+      name: 'Grade A',
+      value: 'blue',
+    },
+    {
+      name: 'Grade B',
+      value: 'red',
+    },
+  ];
   series = [
     {
       name: 'Grade A',
@@ -42,6 +57,21 @@ export class DashboardComponent {
     },
     {
       name: 'Grade C',
+      value: 10,
+      label: '10%',
+    },
+    {
+      name: 'Grade D',
+      value: 20,
+      label: '20%',
+    },
+    {
+      name: 'Grade E',
+      value: 70,
+      label: '70%',
+    },
+    {
+      name: 'Grade F',
       value: 10,
       label: '10%',
     },

@@ -37,6 +37,7 @@
       [yAxis]="true"
       [gradient]="false"
       [view]="[600, 200]"
+      style="fill: white"
     >
     </ngx-charts-bar-horizontal>
   </div>
@@ -64,6 +65,7 @@
       [doughnut]="true"
       [legendPosition]="position"
       [labelFormatting]="pieChartLabel.bind(this, series)"
+      [customColors]="customColors"
     >
     </ngx-charts-pie-chart>
   </div>
