@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../shared/data.service';
 import { DropOffGeneratorService } from '../shared/drop-off-generator.service';
 import { ChickenData } from '../shared/chicken-data';
-import {
-  AxisLabelComponent,
-  LegendEntryComponent,
-  LegendPosition,
-  LegendType,
-} from '@swimlane/ngx-charts';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,76 +10,26 @@ import {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  dropOffLaneCountData: number[] = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ];
-  dataset = [
-    { name: 'Line 1', value: this.dropOffLaneCountData[0] },
-    { name: 'Line 2', value: this.dropOffLaneCountData[1] },
-    { name: 'Line 3', value: this.dropOffLaneCountData[2] },
-    { name: 'Line 5', value: this.dropOffLaneCountData[4] },
-    { name: 'Line 6', value: this.dropOffLaneCountData[5] },
-    { name: 'Line 7', value: this.dropOffLaneCountData[6] },
-    { name: 'Line 8', value: this.dropOffLaneCountData[7] },
-    { name: 'Line 12', value: this.dropOffLaneCountData[11] },
-    { name: 'Line 13', value: this.dropOffLaneCountData[12] },
-    { name: 'Line 14', value: this.dropOffLaneCountData[13] },
-    { name: 'Line 15', value: this.dropOffLaneCountData[14] },
-    { name: 'Line 16', value: this.dropOffLaneCountData[15] },
-  ];
-
-  position = LegendPosition.Below;
-  customColors = [
-    {
-      name: 'Grade A',
-      value: 'blue',
-    },
-    {
-      name: 'Grade B',
-      value: 'red',
-    },
-  ];
-  series = [
-    {
-      name: 'Grade A',
-      value: 20,
-      label: '20%',
-    },
-    {
-      name: 'Grade B',
-      value: 70,
-      label: '70%',
-    },
-    {
-      name: 'Grade C',
-      value: 10,
-      label: '10%',
-    },
-    {
-      name: 'Grade D',
-      value: 20,
-      label: '20%',
-    },
-    {
-      name: 'Grade E',
-      value: 70,
-      label: '70%',
-    },
-    {
-      name: 'Grade F',
-      value: 10,
-      label: '10%',
-    },
-  ];
-
   timer: any;
   ShackleDataArray: ChickenData[] = [];
+  dataArray: ChickenData[] = [];
+
   currentShackleData: ChickenData = {
     weight: 0,
     grade: 0,
     dropOff: 0,
     shackleId: 0,
   };
+
+  /* for charts */
+  improperWeightChickens = 0;
+  properWeightChickens = 0;
+  gradesCount = new Array(7).fill(0);
+  chickensInEachLineCount = new Array(17).fill(0);
+  dataSet: { name: string; value: number }[] = [];
+  gradesDataSet: { name: string; value: number }[] = [];
+  weightsDataSet: { name: string; value: number }[] = [];
+  position = LegendPosition.Below;
 
   constructor(
     private dataSvc: DataService,
@@ -96,13 +41,40 @@ export class DashboardComponent {
       this.getGradeData();
       this.getWeightData();
     }, 250);
+    /* Data formation for weight, grade and dropoff lines */
+    this.chickensInEachLineCount.forEach((count, idx) => {
+      if (idx !== 0 && idx !== 4 && idx !== 9 && idx !== 10) {
+        let dataObj = { name: `Line${idx}`, value: count };
+        this.dataSet.push(dataObj);
+      }
+    });
+
+    this.gradesCount.forEach((count, idx) => {
+      if (idx !== 0) {
+        this.gradesDataSet.push({
+          name: `Grade ${String.fromCharCode(idx + 64)}`,
+          value: this.gradesCount[idx],
+        });
+      }
+    });
+
+    this.weightsDataSet = [
+      {
+        name: 'Wt. b/w 1700 & 3300',
+        value: this.properWeightChickens,
+      },
+      {
+        name: 'Wt. < 1700 & > 3300',
+        value: this.improperWeightChickens,
+      },
+    ];
   }
 
-  dataArray: ChickenData[] = [];
-  computSchakleData(id: number, parameter: string, value: number) {
+  computeSchakleData(id: number, parameter: string, value: number) {
     const idx = this.dataArray.findIndex((data) => id === data.shackleId);
     if (idx > -1) {
       let currentSchakleItem = this.dataArray.splice(idx, 1)[0];
+
       currentSchakleItem = {
         ...currentSchakleItem,
         [parameter]: value,
@@ -111,10 +83,7 @@ export class DashboardComponent {
         currentSchakleItem.weight,
         currentSchakleItem.grade
       );
-
-      this.dataset[currentSchakleItem.dropOff - 1].value =
-        this.dropOffLaneCountData[currentSchakleItem.dropOff - 1] += 1;
-      this.dataset = [...this.dataset];
+      this.calculateMetrics(currentSchakleItem);
       this.currentShackleData = currentSchakleItem;
     } else {
       let shackleObj = { shackleId: id, [parameter]: value };
@@ -122,34 +91,56 @@ export class DashboardComponent {
     }
   }
 
+  calculateMetrics(item: any) {
+    if (item.weight < 1700 || item.weight > 3300) this.improperWeightChickens++;
+    else this.properWeightChickens++;
+
+    this.gradesCount[item.grade]++;
+    this.chickensInEachLineCount[item.dropOff]++;
+    this.setChartValues();
+  }
+
+  setChartValues() {
+    this.dataSet.forEach((obj) => {
+      let lineNo = +obj['name'].substring(4);
+      obj['value'] = this.chickensInEachLineCount[lineNo];
+    });
+    this.dataSet = [...this.dataSet];
+
+    this.gradesDataSet.forEach((obj, idx) => {
+      obj['value'] = this.gradesCount[idx + 1];
+    });
+    this.gradesDataSet = [...this.gradesDataSet];
+
+    this.weightsDataSet[0].value = this.properWeightChickens;
+    this.weightsDataSet[1].value = this.improperWeightChickens;
+    this.weightsDataSet = [...this.weightsDataSet];
+  }
+
   getWeightData() {
     this.dataSvc.getData('ChickenWeightData').subscribe(
       (data) => {
-        this.computSchakleData(
+        this.computeSchakleData(
           data[0].shackleId,
           'weight',
           data[0].weightInGram
         );
       },
-      (error) => {}
+      (error) => {
+        /* error component */
+      }
     );
   }
 
   getGradeData() {
     this.dataSvc.getData('ChickenGradeData').subscribe(
       (data) => {
-        this.computSchakleData(data[0].shackleId, 'grade', data[0].grade);
+        this.computeSchakleData(data[0].shackleId, 'grade', data[0].grade);
       },
-      (error) => {}
+      (error) => {
+        /* error component */
+      }
     );
-  }
-
-  pieChartLabel(series: any[], name: string): string {
-    const item = series.filter((data) => data.name === name);
-    if (item.length > 0) {
-      return item[0].label;
-    }
-    return name;
   }
 
   ngOnDestroy() {

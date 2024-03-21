@@ -32,13 +32,16 @@ export class DropOffGeneratorService {
 
   calculateDropOff(weight: number = 0, grade: number = 0) {
     let gradeRange = this.findGradeRange(grade);
-    let dropOffId = 0;
+    let dropOffId = 1;
     for (let i = 0; i < gradeRange.length; i++) {
       if (
         weight >= gradeRange[i].rangeStart &&
         weight <= gradeRange[i].rangeEnd
       ) {
-        dropOffId = gradeRange[i].dropOffLine;
+        dropOffId =
+          gradeRange[i].dropOffLine == 0
+            ? this.checkTrafficInLine6()
+            : gradeRange[i].dropOffLine;
         break;
       }
     }

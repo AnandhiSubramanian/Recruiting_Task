@@ -1,12 +1,15 @@
-$primary-color-blue1: #496989;
-$primary-color-blue2: #58a399;
-
-$sec-color-blue1: #a8cd9f;
-$sec-color-blue2: #e2f4c5;
-$sec-color-blue3: #164863;
-$sec-color-blue4: #427d9d;
-$sec-color-blue5: #9bbec8;
-$sec-color-blue6: #ddf2fd;
+/* $baader-grey: #48504c;
+$baader-blue: #003158;
+$baader-white: white;
+$grey-2: #a8b2af;
+$grey-addition: #dbdcdb;
+$red: #9b2423;
+$green-6: #237f52;
+$yellow: #f9a800;
+$baader-green: #bbcf00;
+$off-white: #f6f6f6; */
+$grey-4: #66716b;
+$grey-1: #dae1db;
 
 .main-container {
   display: grid;
@@ -18,13 +21,18 @@ $sec-color-blue6: #ddf2fd;
 .content {
   display: grid;
   grid-row: 2/3;
-  grid-template-columns: 1fr 10fr;
-  background-color: black;
+  grid-template-columns: 2fr 10fr;
+  background-color: #1e2834;
 }
 .header {
   display: flex;
   justify-content: space-between;
   height: 3em;
+  background-color: #151e28;
+  color: $grey-1;
+  padding: 0 2em;
+  font-family: Impact, "Arial Narrow", "Arial", sans-serif, sans-serif;
+  border-bottom: 1px solid $grey-4;
 }
 
 .logo {
@@ -39,30 +47,32 @@ $sec-color-blue6: #ddf2fd;
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  // color: white;
 }
 .nav {
-  background-color: black;
-  color: white;
+  background-color: #00101d;
+  color: $grey-1;
 }
 ul {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-  gap: 1em;
+  padding: 0;
 }
 
 li {
   list-style-type: none;
   display: flex;
   justify-self: center;
-  justify-content: space-between;
-
+  align-items: center;
+  justify-content: center;
   padding: 0.5em;
   padding-right: 1em;
-  background-color: rgb(59, 57, 57);
+  background-color: #00101d;
+
+  span {
+    padding-right: 0.5em;
+  }
 }
 
 li:hover {
-  background-color: rgb(179, 174, 174);
+  background-color: #151e28;
 }

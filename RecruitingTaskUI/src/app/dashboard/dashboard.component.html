@@ -1,7 +1,7 @@
 <div class="container">
   <div class="data-container">
     <div class="entry">
-      <label for="id">Shackle Id</label>
+      <label for="id">Shackle ID</label>
       <div name="id" class="val">
         <h1>{{ currentShackleData.shackleId }}</h1>
       </div>
@@ -13,31 +13,31 @@
       </div>
     </div>
     <div class="entry">
+      <label for="dropOff">DropOff ID</label>
+      <div name="dropOff" class="val">
+        <h1>{{ currentShackleData.dropOff }}</h1>
+      </div>
+    </div>
+    <div class="entry">
       <label for="grade">Grade</label>
       <div name="grade" class="val">
         <h1>{{ currentShackleData.grade }}</h1>
       </div>
     </div>
-    <div class="entry">
-      <label for="dropOff">DropOff Id</label>
-      <div name="dropOff" class="val">
-        <h1>{{ currentShackleData.dropOff }}</h1>
-      </div>
-    </div>
   </div>
   <div class="weight-container">
     <ngx-charts-bar-horizontal
-      [results]="dataset"
-      [xAxisLabel]="'x-axis'"
-      [legendTitle]="'legend'"
-      [yAxisLabel]="'y-axis'"
-      [legend]="true"
+      [results]="dataSet"
+      [legendTitle]="'Dropoff Lines'"
+      [yAxisLabel]="'Dropoff Lines'"
       [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
       [yAxis]="true"
       [gradient]="false"
       [view]="[600, 200]"
-      style="fill: white"
+      style="fill: #a8b2af"
+      [legendPosition]="position"
+      [showDataLabel]="true"
+      [barPadding]="8"
     >
     </ngx-charts-bar-horizontal>
   </div>
@@ -45,12 +45,11 @@
   <div class="grade-container">
     <ngx-charts-pie-chart
       [view]="[200, 200]"
-      [results]="series"
+      [results]="gradesDataSet"
       [legend]="true"
       [doughnut]="true"
       [legendTitle]="'Grades'"
       [legendPosition]="position"
-      [labelFormatting]="pieChartLabel.bind(this, series)"
     >
     </ngx-charts-pie-chart>
   </div>
@@ -58,14 +57,11 @@
   <div class="weight-chart-container">
     <ngx-charts-pie-chart
       [view]="[200, 200]"
-      [results]="series"
+      [results]="weightsDataSet"
       [doughnut]="true"
       [legendTitle]="'Weight ranges'"
       [legend]="true"
-      [doughnut]="true"
       [legendPosition]="position"
-      [labelFormatting]="pieChartLabel.bind(this, series)"
-      [customColors]="customColors"
     >
     </ngx-charts-pie-chart>
   </div>
