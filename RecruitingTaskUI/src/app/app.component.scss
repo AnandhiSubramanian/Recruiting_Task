@@ -13,7 +13,7 @@ $grey-1: #dae1db;
 
 .main-container {
   display: grid;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 1fr 11fr;
   height: 100vh;
   width: 100%;
 }
@@ -32,7 +32,7 @@ $grey-1: #dae1db;
   color: $grey-1;
   padding: 0 2em;
   font-family: Impact, "Arial Narrow", "Arial", sans-serif, sans-serif;
-  border-bottom: 1px solid $grey-4;
+  border-bottom: 5px solid $grey-4;
 }
 
 .logo {
@@ -62,7 +62,6 @@ li {
   list-style-type: none;
   display: flex;
   justify-self: center;
-  align-items: center;
   justify-content: center;
   padding: 0.5em;
   padding-right: 1em;
@@ -70,9 +69,15 @@ li {
 
   span {
     padding-right: 0.5em;
+    vertical-align: bottom;
+  }
+  a {
+    text-decoration: none;
+    color: $grey-1;
   }
 }
 
+.active-link,
 li:hover {
   background-color: #151e28;
 }

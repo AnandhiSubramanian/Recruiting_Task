@@ -144,6 +144,6 @@ export class DashboardComponent {
   }
 
   ngOnDestroy() {
-    this.timer.clearInterval();
+    clearInterval(this.timer);
   }
 }
